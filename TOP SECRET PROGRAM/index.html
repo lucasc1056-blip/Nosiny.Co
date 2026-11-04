@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07110c">
+  <title>Nosiny.Console — Admin Console</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">▰</span> Nosiny<span>.</span>Console</div>
+      <div class="status"><i></i> LOCAL NODE <strong id="nodeStatus">STANDBY</strong></div>
+    </header>
+
+    <section id="loginView" class="login-view">
+      <div class="terminal-tag">[ SECURE ADMIN ACCESS ]</div>
+      <h1>Enter the vault<span class="cursor">_</span></h1>
+      <p class="muted">Single-operator word storage // client-side only</p>
+      <form id="loginForm" class="login-form">
+        <label for="adminKey">ADMIN KEY</label>
+        <div class="input-row">
+          <input id="adminKey" type="password" autocomplete="current-password" placeholder="type access key" required autofocus>
+          <button type="submit">AUTHENTICATE</button>
+        </div>
+        <p id="loginMessage" class="message" role="alert"></p>
+      </form>
+      <form id="recoveryForm" class="recovery-form">
+        <label for="recoveryPhrase">FORGOT ADMIN KEY?</label>
+        <div class="input-row"><input id="recoveryPhrase" type="text" placeholder="enter recovery phrase"><button type="submit" class="ghost-button">RECOVER</button></div>
+        <p id="recoveryMessage" class="message" role="alert"></p>
+      </form>
+      <p class="hint">First launch: choose an admin key. This key is never transmitted.</p>
+    </section>
+
+    <section id="appView" class="app-view hidden" aria-live="polite">
+      <div class="welcome-row">
+        <div>
+          <div class="terminal-tag">[ ADMIN CONSOLE // ONLINE ]</div>
+          <h1>Word vault<span class="cursor">_</span></h1>
+        </div>
+        <div class="header-actions"><button id="consoleButton" class="ghost-button">COMMAND CONSOLE</button><button id="lockButton" class="ghost-button">LOCK</button></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span>LOCAL FILES</span><strong>CONSOLE</strong></div>
+        <div class="stat-card"><span>STORAGE MODE</span><strong>LOCAL</strong></div>
+        <div class="stat-card"><span>NODE STATUS</span><strong class="green">ENCRYPTED</strong></div>
+      </div>
+
+      <section class="panel editor-panel">
+        <div class="panel-heading"><span>01 // ACTIVE PAGE</span><span id="activeFile" class="console-dim">UNSAVED</span></div>
+        <textarea id="plainText" placeholder="type or paste the page here, then open COMMAND CONSOLE"></textarea>
+        <div class="tip">Use the command console to encrypt, open, delete, or list files.</div>
+      </section>
+      <section id="consoleModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="consoleTitle">
+        <div class="panel console-panel">
+          <div class="panel-heading"><span id="consoleTitle">01 // LOCAL VAULT CONSOLE</span><button id="closeConsoleButton" class="text-button">CLOSE ×</button></div>
+          <div id="consoleOutput" class="console-output"><div>Nosiny.Console shell ready.</div><div class="console-dim">Commands: /create [name] &nbsp; /encrypt [name] &nbsp; /open [name] &nbsp; /destroy [name] &nbsp; /files &nbsp; /delete &nbsp; /help</div><div class="console-dim">No filename? The first non-empty line becomes the title.</div></div>
+          <form id="consoleForm" class="console-form"><span>&gt;</span><input id="consoleInput" autocomplete="off" placeholder="type a command" aria-label="Vault console command"></form>
+        </div>
+      </section>
+      <section id="nosinyModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="nosinyTitle">
+        <div class="panel builder-panel">
+          <div class="panel-heading"><span id="nosinyTitle">Nosiny.File // COMMAND BUILDER</span><button id="closeNosinyButton" class="text-button">CLOSE ×</button></div>
+          <p class="console-dim">Create a local command. The command name and content are stored only in this browser.</p>
+          <label for="customCommandName">COMMAND NAME</label>
+          <input id="customCommandName" placeholder="example: /greet">
+          <label for="customCommandContent">COMMAND CONTENT</label>
+          <textarea id="customCommandContent" class="builder-textarea" placeholder="message, filename, or command content"></textarea>
+          <div class="function-label">CHOOSE FUNCTION</div>
+          <div class="function-buttons"><button data-function="print">PRINT MESSAGE</button><button data-function="create">CREATE FILE</button><button data-function="open">OPEN FILE</button></div>
+          <p id="builderMessage" class="message"></p>
+        </div>
+      </section>
+      <footer class="footer-note">LOCAL VAULT STORAGE // COMMAND CONSOLE // PRIVATE WINDOW COMPATIBLE</footer>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
